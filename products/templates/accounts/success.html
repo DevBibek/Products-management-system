@@ -1,0 +1,16 @@
+ {% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}
+Login
+{% endblock title %}
+
+
+{% block content %}
+<div class="form-container">
+   <p class="text-center fw-bold "> Your password has been updated successfully <br>
+   <a href="{% url 'login_p' %}" class="btn btn-info fw-bold mt-4" >LOGIN NOW</a></p>
+</div>
+
+{% endblock content %}

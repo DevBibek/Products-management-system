@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+
+{% block title %}
+Register_page
+{% endblock title %}
+
+
+{% block content %}
+<div class="form-container">
+	<p class="title">Create account</p>
+       {% if messages %}
+              {% for m in messages %}
+              {% if 'register' in m.tags %}
+                 {% if m.tags == 'success' %}
+                 <p style="color: #4CAF50; text-align: center; font-weight: bold;" >{{m}}</p>
+                 {% else %}
+                 <p class="my-message" style="color: rgb(248, 18, 18); text-align: center; font-weight: bold;" >{{m}}</p>
+                 {% endif %}
+               {% endif %}
+              {% endfor %}
+            {% endif %}
+	<form class="form" method="post">
+        {% csrf_token %}
+        <div class="input-group">
+			<label for="fname">First name</label>
+			<input type="text" value="{{fname}}" name="fname" id="fname" placeholder="">
+		</div>
+         <div class="input-group">
+			<label for="lname">Last name</label>
+			<input type="text" value="{{lname}}" name="lname" id="lname" placeholder="">
+		</div>
+		<div class="input-group">
+			<label for="username">Username</label>
+			<input type="text" name="username" value="{{username}}" id="username" placeholder="">
+		</div>
+    	<div class="input-group">
+			<label for="email">E-mail</label>
+			<input type="email" name="uemail" value="{{email}}" id="email" placeholder="">
+		</div>
+		<div class="input-group">
+			<label for="password">Password</label>
+			<input type="password" name="password" value="{{password}}" id="password" placeholder="">
+		</div>
+        	<div class="input-group">
+			<label for="cpassword">Confirm Password</label>
+			<input type="password" name="cpassword" value="{{cpassword}}" id="cpassword" placeholder="">
+		</div>
+
+		<button class="sign">Sign up</button>
+   	<div class="account">        <p>Alreday have an account? 
+		<a rel="noopener noreferrer" href="{% url 'login_p' %}">login</a>
+        </P>
+	</div>
+	</form>
+
+</div>
+{% endblock content %}
+    

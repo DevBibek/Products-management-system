@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}
+Product_list
+{% endblock title %}
+
+
+{% block content %}
+<div class="container-fluid mt-3">
+    <div class="row justify-content-center">
+        <div class="col-7 border rounded p-3 shodaw-sm bg-light">
+      <!-- =================================== start Search button ====================== -->
+         <form method="post" class="d-flex mb-3" role="search" action="{% url 'productlist' %}">
+              {% csrf_token %}
+
+                <input class="form-control me-2" name="search" type="search" placeholder="Search here products ..." width="200">
+                <button type="submit" class=" py-2 fw-bold  btn btn-primary text-white"><i class="fa-solid fa-magnifying-glass"></i></button>
+          </form>
+       <!-- ================================== end searchbutton ========================= -->
+            <h3 class="bg-warning text-center py-3 rounded-2 fw-bold">Products List</h3>
+          {% if messages %}
+           {% for m in messages %}
+             {% if 'add_product' in m.tags or 'update_product' in m.tags or 'delete_product' in m.tags or 'search' in m.tags %}
+                {% if 'success' in m.tags %}
+             <p class="my-message" style="color:green; text-align: center; font-weight: bold;">{{m}}</p>
+             {% elif 'warning' in m.tags %}
+             <p class="my-message" style="color:rgb(242, 238, 9); text-align: center; font-weight: bold;">{{m}}</p>
+             {% else %}
+             <p class="my-message" style="color:rgb(239, 7, 7); text-align: center; font-weight: bold;">{{m}}</p>
+              {% endif %}
+            {% endif %}
+           {% endfor %}
+          {% endif %}
+            <table class="table ">
+                <thead class="table-info">
+                <tr>
+                  <th scope="col">S.N</th>
+                  <th scope="col">Produt Name</th>
+                  <th scope="col">Price</th>
+                  <th scope="col">Category</th>
+                  <th scope="col">stock</th>
+                  <th scope="col">Action</th>
+                </tr>
+              </thead>
+              {% if product %}
+              {% for p in product %}
+              <tbody>
+                <tr>
+                  <th scope="row">{{forloop.counter}}</th>
+                  <td>{{p.name}}</td>
+                  <td>{{p.price}}</td>
+                  <td>{{p.category}}</td>
+                  <td>{{p.stock}}</td>
+                <td>
+                <a href="{% url 'updateproduct' p.id %}" ><button type="submit" class="btn btn-success"><i class="fa-solid fa-pen-to-square"></i></button></a>
+                <button class="btn btn-danger" data-bs-toggle="modal",  data-bs-target="#deleteModal"><i class="fa-solid fa-trash"></i></button>
+                  </td>
+                </tr>
+              </tbody>
+
+
+              <!-- ========================== start deletemodal =============================== -->
+
+
+               <div class="modal fade" id="deleteModal" tabindex="-1">
+
+                <div class="modal-dialog">
+                  <div class="modal-content">
+
+                    <div class="modal-header">
+                      <h5 class="modal-title">Confirm Delete</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+
+                    <div class="modal-body">
+                      Are you sure you want to delete
+                      <strong>[{{ p.name }}]</strong>?
+                    </div>
+
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        Cancel
+                      </button>
+
+                      <a href="{% url 'deleteproduct' p.id %}" class="btn btn-danger">
+                        Yes, Delete
+                      </a>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+               <!-- ========================== end deletemodal ================================= -->
+              {% endfor %}
+              {% endif %}
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock content %}

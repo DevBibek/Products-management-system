@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}
+Dashboard
+{% endblock title %}
+
+
+{% block content %}
+<div class="contatiner-fluid mt-3">
+    <div class="row justify-content-center">
+        <div class="col-9">
+            
+    <div class="col-md-4">
+      <div class="card text-white bg-primary mb-3">
+        <div class="card-body">
+          <h5>Total Products</h5>
+          <h2>{{ total_products }}</h2>
+        </div>
+      </div>
+    </div>
+
+   
+
+  <div class="mt-4">
+    <a href="{% url 'addproduct' %}" class="btn btn-primary">+ Add Product</a>
+    <a href="{% url 'productlist' %}" class="btn btn-secondary">View Products</a>
+  </div>
+
+  <div class="mt-4">
+    <h4>Recent Products</h4>
+
+    <table class="table table-bordered mt-2">
+      <thead class="table-dark">
+        <tr>
+          <th>Name</th>
+          <th>Price</th>
+          <th>Stock</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {% for p in products %}
+        <tr>
+          <td>{{ p.name }}</td>
+          <td>{{ p.price }}</td>
+          <td>{{p.stock}}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+
+    </table>
+  </div>
+
+        </div>
+    </div>
+</div>
+{% endblock content %}
