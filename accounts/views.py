@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate,login,logout
+from django.contrib.auth.forms import PasswordChangeForm
 # Create your views here.
 
 def register(request):
@@ -83,14 +84,14 @@ def log_out(request):
 
 
 
-# def changepassword(request):
-#      form = PasswordChangeForm(user= request.user)
-#      if request.method == "POST":
-#           form = PasswordChangeForm(user=request.user,data = request.POST)
-#           if form.is_valid():
-#                form.save()
-#                messages.success(request,"Password change successfully")
-#                return redirect('homepage')
+def changepassword(request):
+     form = PasswordChangeForm(user= request.user)
+     if request.method == "POST":
+          form = PasswordChangeForm(user=request.user,data = request.POST)
+          if form.is_valid():
+               form.save()
+               messages.success(request,"Password change successfully")
+               return redirect('homepage')
           
-#      return render(request,"accounts/changepassword.html",{"form":form})
+     return render(request,"accounts/changepassword.html",{"form":form})
 

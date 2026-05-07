@@ -32,15 +32,19 @@
             <li><a href="{% url 'productlist' %}"><i class="fa-solid fa-file"></i></i>Products</a></li>
             <li><a href="{% url 'addproduct' %}"><i class="fa-solid fa-circle-plus"></i>Add Products</a></li>
            {% if user.is_authenticated %}
-            <span class="text-white mt-3">
-            <i class="fa-solid fa-user"></i> {{ user.username }}
-            </span>
-        
-            <div class="d-grid">
-                 <a href="{% url 'logout_p' %}" class="btn btn-dark rounded-3 mt-2 mb-2 py-2">
-                <i class="fa-solid fa-right-from-bracket"></i>Logout
-                 </a>
+             <div class="profile">
+                <span class="username"><i class="fa-solid fa-user"></i>{{user.username}}</span>
+
+                <div class="dropdown">
+                    <a href="#">My Profile</a>
+                    <a href="{% url 'passwordchange' %}">Change Password</a>
+                    <a href="{% url 'logout_p' %}">Logout</a>
+                </div>
             </div>
+
+
+
+        
             {% else %}
              <div class="d-grid">
                  <a href="{% url 'login_p' %}" class="btn btn-dark rounded-3 mt-2 mb-2 py-2">

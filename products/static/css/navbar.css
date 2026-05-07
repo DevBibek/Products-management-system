@@ -65,3 +65,53 @@ li a{
     background-color: teal;
 }
 
+.profile {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+/* Username */
+.username {
+    color: white;
+    padding: 8px 12px;
+    /* background: #2d2d44; */
+    border-radius: 20px;
+}
+
+/* Dropdown box (hidden by default) */
+.dropdown {
+    position: absolute;
+    top: 120%;
+    right: 0;
+    background: white;
+    min-width: 150px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+
+    /* IMPORTANT: hidden */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: 0.3s ease;
+}
+
+/* Dropdown links */
+.dropdown a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: #333;
+}
+
+.dropdown a:hover {
+    background: #f0f0f0;
+}
+
+/* SHOW dropdown on hover */
+.profile:hover .dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
